@@ -1,0 +1,27 @@
+FROM ubuntu:latest
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    unzip \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy the build script and configuration files
+COPY build.py /app/build.py
+COPY hererocks_config.json /app/hererocks_config.json
+
+# Set the working directory
+WORKDIR /app
+
+# Create and activate a virtual environment
+RUN python3 -m venv venv
+RUN . venv/bin/activate
+
+# Entry point to run the build script
+ENTRYPOINT ["/app/venv/bin/python", "build.py"]
+
+# Volume mount for local development
+VOLUME ["/app/linux"]

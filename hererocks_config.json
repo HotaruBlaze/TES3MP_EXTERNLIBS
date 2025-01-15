@@ -1,0 +1,13 @@
+{
+  "libraries": ["luasocket", "luafilesystem"],
+  "windows": {
+    "lua_versions": ["luajit"],
+    "install_path": "hererocks",
+    "preinstall": "pip install hererocks && hererocks \"$install_path\" --luajit 2.1 -rlatest"
+  },
+  "linux": {
+    "lua_versions": ["luajit"],
+    "install_path": "/hererocks",
+    "preinstall": "pip install hererocks --break-system-packages && hererocks \"$install_path\" --luajit 2.1 -rlatest"
+  }
+}
